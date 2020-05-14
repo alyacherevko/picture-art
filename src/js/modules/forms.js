@@ -1,11 +1,9 @@
-// import checkNumInputs from './checkNumInputs';
+import { postData } from '../services/requests';
 
 const forms = () => {
     const form = document.querySelectorAll('form');
     const inputs = document.querySelectorAll('input');
     const upload = document.querySelectorAll('[name="upload"]');
-
-    // checkNumInputs('input[name="user_phone"]');
     
     const message = {
         loading: 'Загрузка...',
@@ -19,16 +17,6 @@ const forms = () => {
     const path = {
       designer: 'assets/server.php',
       question: 'assets/question.php',
-    };
-
-    const postData = async (url, data) => {
-        // document.querySelector('.status').textContent = message.loading;
-        let res = await fetch(url, {
-            method: "POST",
-            body: data
-        });
-
-        return await res.text();
     };
 
     const clearInputs = () => {
@@ -78,8 +66,7 @@ const forms = () => {
             item.closest('.popup-design') || item.classList.contains('calc_form') ? api = path.designer : api = path.question;
 
             postData(api, formData)
-                .then(res => {
-                    console.log(res);
+                .then(() => {
                     statusImg.setAttribute('src', message.ok);
                     textMessage.textContent = message.success;
                 })
